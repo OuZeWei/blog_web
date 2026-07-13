@@ -1,17 +1,50 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import PostCard from '../components/PostCard.tsx';
 
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const recentPosts = posts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 5);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="首页" description="一个关于前端开发、技术探索与生活的个人博客">
+  <section class="text-center py-16 md:py-20">
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-3">欢迎来到 TechBlog 👋</h1>
+    <p class="text-lg text-gray-500 max-w-xl mx-auto mb-8">
+      这里记录着关于前端开发、技术探索与编程思考的点滴。
+    </p>
+    <div class="flex gap-3 justify-center flex-wrap">
+      <a href="/posts/" class="btn-primary">浏览文章</a>
+      <a href="/about/" class="btn-outline">了解更多</a>
+    </div>
+  </section>
+
+  <section class="mt-8">
+    <div class="section-title">
+      <h2 class="text-2xl font-bold m-0">最新文章</h2>
+      <a href="/posts/" class="text-sm font-medium text-brand-600 hover:text-brand-700">查看全部 →</a>
+    </div>
+
+    {
+      recentPosts.length > 0 ? (
+        <div class="flex flex-col gap-5">
+          {recentPosts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              slug={post.id.replace(/\.\w+$/, '')}
+              description={post.data.description}
+              date={post.data.date}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 bg-gray-50 rounded-lg text-gray-500">
+          <p>📝 还没有文章，开始写第一篇博文吧！</p>
+        </div>
+      )
+    }
+  </section>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于我" description="关于我和这个技术博客">
+  <section class="pt-8">
+    <h1 class="text-3xl font-bold">关于我 👨‍💻</h1>
+    <div class="max-w-3xl">
+      <p class="text-gray-600">
+        我是一名热爱前端的开发者，专注于 Web 技术与用户体验。
+        工作之余喜欢研究新技术、写博客分享知识。
+      </p>
+      <p class="text-gray-600">
+        这个博客使用 <strong>Astro</strong> 和 <strong>React</strong> 构建，
+        旨在记录学习过程中的思考和收获。
+      </p>
+
+      <h2 class="text-xl font-bold mt-8 mb-4">技术栈</h2>
+      <div class="flex flex-wrap gap-2 mb-8">
+        <span class="tag text-sm">Astro</span>
+        <span class="tag text-sm">React</span>
+        <span class="tag text-sm">TypeScript</span>
+        <span class="tag text-sm">UnoCSS</span>
+        <span class="tag text-sm">Markdown</span>
+      </div>
+
+      <h2 class="text-xl font-bold mt-8 mb-4">联系方式</h2>
+      <p class="text-gray-600">欢迎通过以下方式与我交流：</p>
+      <ul class="text-gray-600">
+        <li>GitHub: <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="text-brand-600 hover:text-brand-700">@username</a></li>
+        <li>Email: <a href="mailto:hello@example.com" class="text-brand-600 hover:text-brand-700">hello@example.com</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
